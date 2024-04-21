@@ -46,9 +46,8 @@ def read_file(path: String, func: List[String] => Unit) = {
 }
 
 /**
-  * Recebe uma list de strings, representando cada linha do arquivo, 
-  * remove todos os caracteres não-alpha, transforma todas as palavras 
-  * em lower case e, em seguida, chama a função scan
+  * Recebe as linhas do arquivo, remove todos os caracteres não-alpha,
+  * transforma todas as palavras em lower case e, em seguida, chama a função scan
   */ 
 def filter_chars(lines: List[String]) = {
   var words = lines.map(s => s.replaceAll("[^a-zA-Z]", "").toLowerCase())
@@ -58,8 +57,8 @@ def filter_chars(lines: List[String]) = {
 }
 
 /**
-  * Dada uma lista com as linhas de um arquivo, onde cada linha
-  * eh uma String, cria uma lista com todas as palavras e chama a função filter_chars. 
+  * Recebe as linhas de um arquivo contendo apenas caracteres alpha
+  * e cria uma lista com todas as palavras separadas. 
   */
 // def scan(lines: List[String]) = {
 //   words = lines.map(line => line.split(" "))
