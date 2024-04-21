@@ -38,31 +38,31 @@ def isStopWord(word: String) = stopWords().contains(word.toLowerCase())
   * Dado um 'path' para um arquivo, lê as linhas do arquivo e chama a função seguinte, filter_chars
   * 
   */
-def read_file(path: String, func: List[String] => Unit) = { 
+def read_file(path: String, func: (List[String],  List[String] => Unit) => Unit): Unit = { 
   var lines = Source.fromFile(path).getLines.toList
 
   // chama filter_chars
-  func(lines)
+  func(lines, scan)
 }
 
 /**
   * Recebe as linhas do arquivo, remove todos os caracteres não-alpha,
   * transforma todas as palavras em lower case e, em seguida, chama a função scan
   */ 
-def filter_chars(lines: List[String]) = {
-  var words = lines.map(s => s.replaceAll("[^a-zA-Z]", "").toLowerCase())
-
-   // chama scan
-  // func(words)
+def filter_chars(lines: List[String], func: List[String] => Unit): Unit = {
+  var words = lines.map(s => s.replaceAll("[^a-zA-Z]", "").toLowerCase()) 
+  // chama scan
+  func(words)
 }
 
 /**
   * Recebe as linhas de um arquivo contendo apenas caracteres alpha
   * e cria uma lista com todas as palavras separadas. 
   */
-// def scan(lines: List[String]) = {
-//   words = lines.map(line => line.split(" "))
-// }
+def scan(lines: List[String]): Unit = {
+  var words = lines.map(line => line.split(" "))
+  println("Funcionou ate aqui!")
+}
 
 /**
   * Leitura da entrada
@@ -71,7 +71,7 @@ object Main {
   def main(args: Array[String]): Unit = {
     args.toList match {
       case "--words" :: count :: input :: Nil =>
-        read_file(input, filter_chars(_: List[String]))
+        read_file(input, filter_chars)
       case _ =>
         println("Invalid arguments. Expected format: --words <count> <InputText>")
     }
