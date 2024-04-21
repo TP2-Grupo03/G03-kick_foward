@@ -41,8 +41,6 @@ def isStopWord(word: String) = stopWords().contains(word.toLowerCase())
 def read_file(path: String, func: List[String] => Unit) = { 
   var lines = Source.fromFile(path).getLines.toList
 
-  println(lines)
-
   // chama filter_chars
   func(lines)
 }
@@ -54,8 +52,6 @@ def read_file(path: String, func: List[String] => Unit) = {
   */ 
 def filter_chars(lines: List[String]) = {
   var words = lines.map(s => s.replaceAll("[^a-zA-Z]", "").toLowerCase())
-
-  println(lines)
 
    // chama scan
   // func(words)
