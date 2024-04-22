@@ -38,7 +38,7 @@ def isStopWord(word: String) = stopWords().contains(word.toLowerCase())
   * Dado um 'path' para um arquivo, lê as linhas do arquivo e chama a função seguinte, filter_chars
   * 
   */
-def read_file(path: String, func: (List[String], (List[String],  List[String] => Unit) => Unit) => Unit): Unit = { 
+def read_file(path: String, func: (List[String], (List[String], (List[String], (List[String], HashMap[String, Int] => Unit) => Unit) => Unit) => Unit) => Unit): Unit = { 
   var lines = Source.fromFile(path).getLines.toList
 
   // chama filter_chars
@@ -49,8 +49,9 @@ def read_file(path: String, func: (List[String], (List[String],  List[String] =>
   * Recebe as linhas do arquivo, remove todos os caracteres não-alpha,
   * transforma todas as palavras em lower case e, em seguida, chama a função scan
   */ 
-def filter_chars(lines: List[String], func: (List[String],  List[String] => Unit) => Unit): Unit = {
-  var words = lines.map(s => s.replaceAll("[^a-zA-Z]", "").toLowerCase()) 
+def filter_chars(lines: List[String], func: (List[String], (List[String], (List[String], HashMap[String, Int] => Unit) => Unit) => Unit) => Unit): Unit = {
+  //var words = lines.map(s => s.replaceAll("[^a-zA-Z]", "").toLowerCase()) 
+  var words = lines.map(s => s.replaceAll("[^a-zA-Z\\s]", "").toLowerCase())
   // chama scan
   func(words, removeStopWords)
 }
@@ -59,31 +60,58 @@ def filter_chars(lines: List[String], func: (List[String],  List[String] => Unit
   * Recebe as linhas de um arquivo contendo apenas caracteres alpha
   * e cria uma lista com todas as palavras separadas. 
   */
-def scan(lines: List[String], func: List[String] => Unit): Unit = {
+def scan(lines: List[String], func: (List[String], (List[String], HashMap[String, Int] => Unit) => Unit) => Unit): Unit = {
   var words = lines.flatMap(line => line.split(" "))
   // chama removeStopWords
-  func(words)
+  func(words, frequencies)
 }
 
 /**
   * Dada uma lista de palavras, remove as palavras que são stopWord.
   */ 
-def removeStopWords(words : List[String]): Unit = {
+def removeStopWords(words : List[String], func: (List[String], HashMap[String, Int] => Unit) => Unit): Unit = {
   words.filter(w => ! isStopWord(w) && w.size > 3)
-  println("Funcionou ate aqui!")
+  // chama frequencies
+  func(words, sortAndPrint)
 }
 
 
+/**
+  * Dada uma lista de palavras, conta a frequencia com que elas
+  * ocorrem na lista. Retorna um Mapa de String (palavra) para Int (frequencia). 
+  */ 
+def frequencies(words: List[String], func: HashMap[String, Int] => Unit): Unit = {
+  val res = new HashMap[String, Int]()
+  words.foreach(w => res += w -> (res.getOrElse(w, 0) + 1))
+  // chama sortAndPrint
+  func(res)
+
+}
+
+/**
+  * Retorna as 10 palavras mais frequentes. 
+  */ 
+def sortAndPrint(map: HashMap[String, Int]): Unit = {
+  //val sorted_map = ListMap(map.toSeq.sortWith(_._2 > _._2):_*)//.take(10)
+  val sorted_map = ListMap(map.toSeq.sortWith(_._2 > _._2)*)
+  println("Funcionou ate sortAndPrint!")
+
+  for ((key, value) <- sorted_map) {
+  println(s"$key - $value")
+  }
+}
 /**
   * Leitura da entrada
   */
 object Main {
   def main(args: Array[String]): Unit = {
     args.toList match {
-      case "--words" :: count :: input :: Nil =>
+      // case "--words" :: count :: input :: Nil =>
+      case "--words" :: input :: Nil =>
         read_file(input, filter_chars)
       case _ =>
-        println("Invalid arguments. Expected format: --words <count> <InputText>")
+        // println("Invalid arguments. Expected format: --words <count> <InputText>")
+        println("Invalid arguments. Expected format: --words <InputText>")
     }
   }
 }
