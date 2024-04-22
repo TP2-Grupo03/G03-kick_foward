@@ -7,3 +7,8 @@
 # arquivos gerados durante a compilacao
 project/
 target/
+
+# arquivos VSCode
+.bloop
+.metals
+.vscode
