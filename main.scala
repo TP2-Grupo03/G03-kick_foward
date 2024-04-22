@@ -94,8 +94,8 @@ def frequencies(words: List[String], func: HashMap[String, Int] => Unit): Unit =
 def sortAndPrint(map: HashMap[String, Int]): Unit = {
   //val sorted_map = ListMap(map.toSeq.sortWith(_._2 > _._2):_*)//.take(10)
   val sorted_map = ListMap(map.toSeq.sortWith(_._2 > _._2)*)
-  println("Funcionou ate sortAndPrint!")
 
+  //printa o conteúdo do HashMap
   for ((key, value) <- sorted_map) {
   println(s"$key - $value")
   }
