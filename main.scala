@@ -89,7 +89,7 @@ def frequencies(words: List[String], func: HashMap[String, Int] => Unit): Unit =
 }
 
 /**
-  * Retorna as 10 palavras mais frequentes. 
+  * Ordena e printa o HashMap com todas as palavras presentes no arquivo de entrada. 
   */ 
 def sortAndPrint(map: HashMap[String, Int]): Unit = {
   //val sorted_map = ListMap(map.toSeq.sortWith(_._2 > _._2):_*)//.take(10)
