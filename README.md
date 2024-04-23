@@ -18,7 +18,7 @@ sbt compile
 - E execute com
 
 ```
-sbt run --words <count> <input>
+sbt run --words <input>
 ```
 
 em que *count* é a contagem de palavras desejada e *input* é o arquivo contendo o texto de entrada
