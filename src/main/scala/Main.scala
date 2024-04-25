@@ -49,8 +49,8 @@ def read_file(path: String, func: (List[String], (List[String], (List[String], (
   * transforma todas as palavras em lower case e, em seguida, chama a função scan
   */ 
 def filter_chars(lines: List[String], func: (List[String], (List[String], (List[String], HashMap[String, Int] => Unit) => Unit) => Unit) => Unit): Unit = {
-  var words = lines.map(s => s.replaceAll("[^a-zA-Z\\s]", "").toLowerCase())
-  
+  var words = lines.map(s => s.replaceAll("[^a-zA-Z\\s]", "").toLowerCase())  
+
   // chama scan
   func(words, removeStopWords)
 }
@@ -83,6 +83,7 @@ def removeStopWords(words : List[String], func: (List[String], HashMap[String, I
   */ 
 def frequencies(words: List[String], func: HashMap[String, Int] => Unit): Unit = {
   val res = new HashMap[String, Int]()
+  
   words.foreach(w => res += w -> (res.getOrElse(w, 0) + 1))
 
   // chama sortAndPrint
@@ -101,6 +102,7 @@ def sortAndPrint(map: HashMap[String, Int]): Unit = {
   println(s"$key - $value")
   }
 }
+
 
 /**
   * Leitura da entrada
