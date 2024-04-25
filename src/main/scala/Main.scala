@@ -31,7 +31,7 @@ def stopWords() = Set("the", "about", "above", "after", "again", "against",
 def isStopWord(word: String) = stopWords().contains(word.toLowerCase()) 
 
 
-// =========== Funcoes =================
+// =========== Funcoes Principais ================= 
 
 /**
   * Dado um 'path' para um arquivo, lê as linhas do arquivo e chama a função seguinte, filter_chars
@@ -49,8 +49,8 @@ def read_file(path: String, func: (List[String], (List[String], (List[String], (
   * transforma todas as palavras em lower case e, em seguida, chama a função scan
   */ 
 def filter_chars(lines: List[String], func: (List[String], (List[String], (List[String], HashMap[String, Int] => Unit) => Unit) => Unit) => Unit): Unit = {
-  var words = lines.map(s => s.replaceAll("[^a-zA-Z\\s]", "").toLowerCase())
- 
+  var words = lines.map(s => s.replaceAll("[^a-zA-Z\\s]", "").toLowerCase())  
+
   // chama scan
   func(words, removeStopWords)
 }
@@ -97,7 +97,7 @@ def frequencies(words: List[String], func: HashMap[String, Int] => Unit): Unit =
 def sortAndPrint(map: HashMap[String, Int]): Unit = {
   val sorted_map = ListMap(map.toSeq.sortWith(_._2 > _._2)*)
 
-  //printa o conteúdo do HashMap
+  //printa o conteúdo do ListMap
   for ((key, value) <- sorted_map) {
   println(s"$key - $value")
   }
