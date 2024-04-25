@@ -1,11 +1,7 @@
 # O estilo Kick Foward
 
-Variação do estilo pipeline com restrições adicionais
+- [Link para a apresentação](https://youtu.be/aToPIrAYurc?si=7rU3Ks5WgDOmZmv4)
 
-- Cada função recebe uma função como parâmetro adicional
-- A função parâmetro é aplicada ao final da função atual
-- A função parâmetro recebe o output da função atual
-- O problema é resolvido como um pipeline de funções, porém a próxima função a ser aplicada é passada como parâmetro da função atual
 
 # Uso
 
@@ -18,7 +14,16 @@ sbt compile
 - E execute com
 
 ```
-sbt run --words <input>
+sbt "run --words <input>"
 ```
 
-em que *count* é a contagem de palavras desejada e *input* é o arquivo contendo o texto de entrada
+em que *input* é o arquivo contendo o texto de entrada
+
+# Autores
+
+- Leonardo Vargas Cabral - 190046953
+- Laryssa de Oliveira Ferreira - 222005386
+- Marcus Emanuel Carvalho Tenedini de Freitas - 222025960
+- Lurian Correia Lima - 222005395
+- ⁠Rafael Kennedy F. Lopes- 211066187
+- ⁠Jackson Vinícius Oliveira Marques - 170013367
