@@ -1,7 +1,7 @@
 # O estilo Kick Foward
 
 - [Link para o repositório](https://github.com/TP2-Grupo03/G03-kick_foward)
-- [Link para a apresentação](https://youtu.be/aToPIrAYurc?si=7rU3Ks5WgDOmZmv4)
+- [Link para a apresentação](https://youtu.be/3Dy41PrUrZc?feature=shared)
 
 
 # Uso
